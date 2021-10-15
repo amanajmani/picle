@@ -1,7 +1,36 @@
-export default function searchReducers(state = {}, action) {
+/* CONSTANTS */
+import {
+  FETCHING_IMAGES,
+  FETCHED_IMAGES,
+  SET_QUERY,
+} from '../constants/actionTypes.constants';
+
+export default function searchReducers(
+  state = {
+    query: '',
+    fetching: false,
+    data: [],
+  },
+  action,
+) {
   switch (action.type) {
-    case 'SEARCH':
-      return action.results;
+    case SET_QUERY:
+      return {
+        ...state,
+        fetching: true,
+        query: action.payload,
+      };
+    case FETCHING_IMAGES:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case FETCHED_IMAGES:
+      return {
+        ...state,
+        fetching: false,
+        data: action.payload,
+      };
     default:
       return state;
   }

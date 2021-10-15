@@ -1,0 +1,3 @@
+export const FETCHING_IMAGES = 'FETCHING_IMAGES';
+export const FETCHED_IMAGES = 'FETCHED_IMAGES';
+export const SET_QUERY = 'SET_QUERY';
