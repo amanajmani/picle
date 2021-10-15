@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 /* COMPONENTS */
-import Search from '../screens/Search';
+import Search from '../screens/search';
 import Details from '../screens/Details';
 
 const Navigation = () => {
