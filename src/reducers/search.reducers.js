@@ -6,7 +6,7 @@ import {
   END_OF_LIST,
   ADDING_TO_IMAGES,
   ADDED_TO_IMAGES,
-} from '../constants/actionTypes.constants';
+} from '../constants/searchActionTypes.constants';
 
 export default function searchReducers(
   state = {

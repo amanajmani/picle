@@ -1,4 +1,4 @@
-import * as searchServices from './search.services';
+import * as searchServices from '../services/search.services';
 
 import debounce from 'lodash/debounce';
 
@@ -10,7 +10,7 @@ import {
   ADDED_TO_IMAGES,
   SET_QUERY,
   END_OF_LIST,
-} from '../constants/actionTypes.constants';
+} from '../constants/searchActionTypes.constants';
 
 const handleError = error => console.log(error);
 
