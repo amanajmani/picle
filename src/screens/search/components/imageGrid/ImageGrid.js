@@ -1,8 +1,28 @@
 import React from 'react';
-import {View, ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator, FlatList, Image} from 'react-native';
 
-import {TouchableOpacity, FlatList, Image} from 'react-native';
-const ImageList = ({data, query, fetchImages, offset, fetching, isListEnd}) => {
+/* REDUX */
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import ActionCreators from '../../../../actions';
+
+/* CONSTANTS */
+import {PORTRAIT, LANDSCAPE} from '../../../../constants/orientation.constants';
+
+const ImageGrid = ({
+  data,
+  query,
+  fetchImages,
+  offset,
+  fetching,
+  isListEnd,
+  orientation,
+}) => {
+  const [
+    onEndReachedCalledDuringMomentum,
+    setOnEndReachedCalledDuringMomentum,
+  ] = React.useState(true);
+
   const getData = () => {
     if (!fetching && !isListEnd) {
       fetchImages(query, offset);
@@ -20,10 +40,7 @@ const ImageList = ({data, query, fetchImages, offset, fetching, isListEnd}) => {
     );
   };
 
-  const [
-    onEndReachedCalledDuringMomentum,
-    setOnEndReachedCalledDuringMomentum,
-  ] = React.useState(true);
+  const numColumns = orientation === PORTRAIT ? 3 : 6;
 
   return (
     <FlatList
@@ -31,6 +48,7 @@ const ImageList = ({data, query, fetchImages, offset, fetching, isListEnd}) => {
       onMomentumScrollBegin={() => {
         setOnEndReachedCalledDuringMomentum(false);
       }}
+      key={orientation === PORTRAIT ? PORTRAIT : LANDSCAPE}
       onEndReached={() => {
         if (!onEndReachedCalledDuringMomentum) {
           getData(); // LOAD MORE DATA
@@ -39,18 +57,26 @@ const ImageList = ({data, query, fetchImages, offset, fetching, isListEnd}) => {
       }}
       ListFooterComponent={renderFooter}
       data={data}
-      contentContainerStyle={{paddingBottom: 20}}
+      numColumns={numColumns}
       keyExtractor={(item, index) => index}
       renderItem={({item}) => (
-        <TouchableOpacity>
-          <Image
-            source={{uri: item.previewURL}}
-            style={[{height: 30, width: 30}]}
-          />
-        </TouchableOpacity>
+        <Image
+          style={{aspectRatio: 1, flex: 1 / numColumns, margin: 20}}
+          source={{uri: item.previewURL}}
+        />
       )}
     />
   );
 };
 
-export default ImageList;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    orientation: state.screen.orientation,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImageGrid);
