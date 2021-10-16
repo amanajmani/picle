@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 
 /* REDUX */
 import {connect} from 'react-redux';
@@ -7,9 +7,13 @@ import {bindActionCreators} from 'redux';
 import ActionCreators from '../../actions';
 
 /* COMPONENTS */
-import SearchBox from './components/molecules/searchBox';
+import SearchBox from './components/searchBox';
+import SearchResult from './components/searchResult';
 
-const Search = ({onSearch, query}) => {
+/* LODASH */
+import isEmpty from 'lodash/isEmpty';
+
+const Search = ({onSearch, query, data, fetching}) => {
   return (
     <View>
       <SearchBox
@@ -17,6 +21,8 @@ const Search = ({onSearch, query}) => {
         onChangeText={onSearch}
         value={query}
       />
+      {isEmpty(query) && <Text>Search for something</Text>}
+      <SearchResult data={data} fetching={fetching} />
     </View>
   );
 };
@@ -28,6 +34,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     query: state.search.query,
+    data: state.search.data,
+    fetching: state.search.fetching,
   };
 }
 
