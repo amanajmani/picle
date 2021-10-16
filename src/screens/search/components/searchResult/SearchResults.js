@@ -1,25 +1,25 @@
 import React from 'react';
-import {View, ActivityIndicator} from 'react-native';
-
-/* LODASH */
-import isEmpty from 'lodash/isEmpty';
 
 /* COMPONENTS */
 import ImageGrid from '../imageGrid';
 
-const SearchResults = ({fetching, data}) => {
-  if (fetching) {
-    return <ActivityIndicator />;
-  }
-
-  if (isEmpty(data)) {
-    return null;
-  }
-
+const SearchResults = ({
+  fetching,
+  data,
+  query,
+  fetchImages,
+  offset,
+  isListEnd,
+}) => {
   return (
-    <View>
-      <ImageGrid data={data} />
-    </View>
+    <ImageGrid
+      data={data}
+      query={query}
+      fetchImages={fetchImages}
+      offset={offset}
+      fetching={fetching}
+      isListEnd={isListEnd}
+    />
   );
 };
 

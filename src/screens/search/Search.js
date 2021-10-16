@@ -10,19 +10,40 @@ import ActionCreators from '../../actions';
 import SearchBox from './components/searchBox';
 import SearchResult from './components/searchResult';
 
-/* LODASH */
-import isEmpty from 'lodash/isEmpty';
-
-const Search = ({onSearch, query, data, fetching}) => {
+const Search = ({
+  onSearch,
+  query,
+  data,
+  fetching,
+  fetchImages,
+  offset,
+  isListEnd,
+  totalHits,
+}) => {
   return (
     <View>
       <SearchBox
         placeholder="picle away"
-        onChangeText={onSearch}
+        onChangeText={q => onSearch(q, offset)}
         value={query}
       />
-      {isEmpty(query) && <Text>Search for something</Text>}
-      <SearchResult data={data} fetching={fetching} />
+
+      {totalHits ? (
+        <SearchResult
+          query={query}
+          data={data}
+          fetching={fetching}
+          fetchImages={fetchImages}
+          offset={offset}
+          isListEnd={isListEnd}
+        />
+      ) : (
+        <Text>
+          {totalHits !== 0
+            ? 'Enter the world of picle and type away'
+            : 'Sorry, no picle results found'}
+        </Text>
+      )}
     </View>
   );
 };
@@ -34,8 +55,11 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     query: state.search.query,
+    offset: state.search.offset,
     data: state.search.data,
     fetching: state.search.fetching,
+    isListEnd: state.search.isListEnd,
+    totalHits: state.search.totalHits,
   };
 }
 
