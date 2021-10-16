@@ -17,8 +17,8 @@ export default function searchReducers(
     case SET_QUERY:
       return {
         ...state,
-        fetching: true,
         query: action.payload,
+        data: [],
       };
     case FETCHING_IMAGES:
       return {
