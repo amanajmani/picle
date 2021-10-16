@@ -1,9 +1,9 @@
+/* CONSTANTS */
+import {STATUS_OK, NOT_FOUND} from '../constants/apiStatus.constants';
+
 function handleError(error) {
   return Promise.reject(error);
 }
-
-const STATUS_OK = 200;
-const NOT_FOUND = 400;
 
 export default async function callApi(url, config) {
   try {

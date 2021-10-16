@@ -10,6 +10,9 @@ import ActionCreators from '../../actions';
 import SearchBox from './components/searchBox';
 import SearchResult from './components/searchResult';
 
+/* CONSTANTS */
+import {DEFAULT_TEXT, NO_RESULTS} from './constants/searchInfoText.constants';
+
 const Search = ({
   onSearch,
   query,
@@ -21,7 +24,7 @@ const Search = ({
   totalHits,
 }) => {
   return (
-    <View>
+    <View style={{flex: 1}}>
       <SearchBox
         placeholder="picle away"
         onChangeText={q => onSearch(q, offset)}
@@ -38,11 +41,7 @@ const Search = ({
           isListEnd={isListEnd}
         />
       ) : (
-        <Text>
-          {totalHits !== 0
-            ? 'Enter the world of picle and type away'
-            : 'Sorry, no picle results found'}
-        </Text>
+        <Text>{totalHits !== 0 ? DEFAULT_TEXT : NO_RESULTS}</Text>
       )}
     </View>
   );
