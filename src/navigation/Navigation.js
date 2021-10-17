@@ -16,7 +16,7 @@ import {checkOrientation} from '../helpers/checkOrientation.helpers';
 
 /* COMPONENTS */
 import Search from '../screens/search';
-import Details from '../screens/Details';
+import Details from '../screens/details';
 
 const Navigation = ({handleOrientation}) => {
   const Stack = createNativeStackNavigator();
@@ -29,7 +29,11 @@ const Navigation = ({handleOrientation}) => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Search">
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+        initialRouteName="Search">
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="Details" component={Details} />
       </Stack.Navigator>
