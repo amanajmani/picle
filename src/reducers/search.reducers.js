@@ -6,6 +6,7 @@ import {
   END_OF_LIST,
   ADDING_TO_IMAGES,
   ADDED_TO_IMAGES,
+  RESET_QUERY,
 } from '../constants/searchActionTypes.constants';
 
 export default function searchReducers(
@@ -26,6 +27,16 @@ export default function searchReducers(
         query: action.payload,
         offset: 1,
         data: [],
+        totalHits: null,
+      };
+    case RESET_QUERY:
+      return {
+        ...state,
+        query: '',
+        fetching: false,
+        data: [],
+        offset: 1,
+        isListEnd: false,
         totalHits: null,
       };
     case FETCHING_IMAGES:

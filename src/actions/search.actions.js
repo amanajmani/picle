@@ -10,6 +10,7 @@ import {
   ADDED_TO_IMAGES,
   SET_QUERY,
   END_OF_LIST,
+  RESET_QUERY,
 } from '../constants/searchActionTypes.constants';
 
 const handleError = error => console.log(error);
@@ -64,4 +65,12 @@ export function fetchImages(query, offset) {
       }, handleError);
     };
   }
+}
+
+export function resetQuery() {
+  return dispatch => {
+    dispatch({
+      type: RESET_QUERY,
+    });
+  };
 }

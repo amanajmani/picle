@@ -4,3 +4,4 @@ export const SET_QUERY = 'SET_QUERY';
 export const END_OF_LIST = 'END_OF_LIST';
 export const ADDING_TO_IMAGES = 'ADDING_TO_IMAGES';
 export const ADDED_TO_IMAGES = 'ADDED_TO_IMAGES';
+export const RESET_QUERY = 'RESET_QUERY';
