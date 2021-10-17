@@ -3,18 +3,17 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: '#000',
-    borderRadius: 40,
+    padding: 10,
     alignItems: 'center',
-    margin: 20,
+    backgroundColor: '#1B1F22',
   },
   inputStyle: {
     flex: 1,
-  },
-  icon: {
+    color: '#C0C0C0',
+    fontSize: 22,
     padding: 10,
   },
+  icon: {},
 });
 
 export default styles;
