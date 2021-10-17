@@ -7,23 +7,36 @@ import Icon from 'react-native-vector-icons/Ionicons';
 /* ASSETS */
 import picleLogo from '../../../../assets/images/picleLogo.png';
 
+/* UTILS */
 import isEmpty from 'lodash/isEmpty';
+
+/* STLES */
 import styles from './searchBox.styles';
 
+/* THEME */
+import theme from '../../../../theme/theme';
+
 const SearchBox = ({placeholder, value, onChangeText, resetValue}) => (
-  <View style={styles.root}>
-    <Image source={picleLogo} style={{width: 28, height: 28}} />
+  <View style={[styles.root, styles.padding]}>
+    <Image source={picleLogo} style={styles.logo} />
+
     <TextInput
-      style={styles.inputStyle}
+      style={[styles.textInput, styles.padding]}
       autoCorrect={false}
       placeholder={placeholder}
       value={value}
       onChangeText={onChangeText}
-      placeholderTextColor="#C0C0C0"
+      placeholderTextColor={theme.palette.text.secondary}
     />
+
     {!isEmpty(value) && (
       <TouchableOpacity onPress={resetValue}>
-        <Icon name="close-outline" size={25} color="#fff" style={styles.icon} />
+        <Icon
+          name="close-outline"
+          size={25}
+          color={theme.palette.text.primary}
+          style={styles.icon}
+        />
       </TouchableOpacity>
     )}
   </View>
