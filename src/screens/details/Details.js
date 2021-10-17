@@ -6,20 +6,23 @@ import Layout from '../../components/layout';
 import BackButton from './components/backButton';
 import ImageDescription from './components/imageDescription';
 
+import theme from '../../theme/theme';
+
+/* STYLES */
+import styles from './details.styles';
+
 const Details = ({route, navigation}) => {
   const {item} = route.params;
+
   return (
-    <Layout style={{flex: 1}}>
+    <Layout style={styles.flex}>
       <BackButton navigation={navigation} />
 
-      <View style={{flex: 1}}>
+      <View style={styles.flex}>
         <Image
           resizeMode="contain"
           source={{uri: item.webformatURL}}
-          style={{
-            flex: 1,
-            borderRadius: 10,
-          }}
+          style={[styles.flex, {borderRadius: theme.shape.borderRadius}]}
         />
       </View>
 
