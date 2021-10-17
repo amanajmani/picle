@@ -12,8 +12,13 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ActionCreators from '../../../../actions';
 
+import theme from '../../../../theme/theme';
+
 /* CONSTANTS */
 import {PORTRAIT, LANDSCAPE} from '../../../../constants/orientation.constants';
+
+/* STYLES */
+import styles from './imageGrid.styles';
 
 const ImageGrid = ({
   data,
@@ -41,7 +46,7 @@ const ImageGrid = ({
       //Footer View with Loader
       <View>
         {fetching ? (
-          <ActivityIndicator color="black" style={{margin: 15}} />
+          <ActivityIndicator color="black" style={{margin: theme.spacing(5)}} />
         ) : null}
       </View>
     );
@@ -68,24 +73,20 @@ const ImageGrid = ({
       keyExtractor={(item, index) => index}
       renderItem={({item}) => (
         <TouchableOpacity
-          style={{
-            flex: 1 / numColumns,
-            margin: 4,
-            shadowColor: 'white',
-            elevation: 8,
-            aspectRatio: 1,
-            borderRadius: 12,
-          }}
+          style={[
+            {
+              flex: 1 / numColumns,
+            },
+            styles.grid,
+            styles.borderRadius,
+          ]}
           onPress={() => {
             navigation.navigate('Details', {
               item,
             });
           }}>
           <Image
-            style={{
-              aspectRatio: 1,
-              borderRadius: 12,
-            }}
+            style={[styles.image, styles.borderRadius]}
             source={{uri: item.webformatURL}}
           />
         </TouchableOpacity>
@@ -101,6 +102,12 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     orientation: state.screen.orientation,
+    query: state.search.query,
+    offset: state.search.offset,
+    data: state.search.data,
+    fetching: state.search.fetching,
+    isListEnd: state.search.isListEnd,
+    totalHits: state.search.totalHits,
   };
 }
 
