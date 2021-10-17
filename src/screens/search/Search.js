@@ -9,9 +9,10 @@ import ActionCreators from '../../actions';
 /* COMPONENTS */
 import SearchBox from './components/searchBox';
 import SearchResult from './components/searchResult';
+import Layout from '../../components/layout';
 
 /* CONSTANTS */
-import {DEFAULT_TEXT, NO_RESULTS} from './constants/searchInfoText.constants';
+import {NO_RESULTS} from './constants/searchInfoText.constants';
 
 const Search = ({
   onSearch,
@@ -22,27 +23,32 @@ const Search = ({
   offset,
   isListEnd,
   totalHits,
+  navigation,
+  resetQuery,
 }) => {
   return (
     <View style={{flex: 1}}>
       <SearchBox
-        placeholder="picle away"
+        placeholder="Search Free Stock Photo"
         onChangeText={q => onSearch(q, offset)}
         value={query}
+        resetValue={resetQuery}
       />
-
-      {totalHits ? (
-        <SearchResult
-          query={query}
-          data={data}
-          fetching={fetching}
-          fetchImages={fetchImages}
-          offset={offset}
-          isListEnd={isListEnd}
-        />
-      ) : (
-        <Text>{totalHits !== 0 ? DEFAULT_TEXT : NO_RESULTS}</Text>
-      )}
+      <Layout style={{flex: 1}}>
+        {totalHits ? (
+          <SearchResult
+            query={query}
+            data={data}
+            fetching={fetching}
+            fetchImages={fetchImages}
+            offset={offset}
+            isListEnd={isListEnd}
+            navigation={navigation}
+          />
+        ) : (
+          <Text>{totalHits === 0 && NO_RESULTS}</Text>
+        )}
+      </Layout>
     </View>
   );
 };
