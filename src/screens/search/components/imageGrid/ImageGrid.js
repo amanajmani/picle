@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, ActivityIndicator, FlatList, Image} from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 
 /* REDUX */
 import {connect} from 'react-redux';
@@ -17,6 +23,7 @@ const ImageGrid = ({
   fetching,
   isListEnd,
   orientation,
+  navigation,
 }) => {
   const [
     onEndReachedCalledDuringMomentum,
@@ -60,10 +67,28 @@ const ImageGrid = ({
       numColumns={numColumns}
       keyExtractor={(item, index) => index}
       renderItem={({item}) => (
-        <Image
-          style={{aspectRatio: 1, flex: 1 / numColumns, margin: 20}}
-          source={{uri: item.previewURL}}
-        />
+        <TouchableOpacity
+          style={{
+            flex: 1 / numColumns,
+            margin: 4,
+            shadowColor: 'white',
+            elevation: 8,
+            aspectRatio: 1,
+            borderRadius: 12,
+          }}
+          onPress={() => {
+            navigation.navigate('Details', {
+              item,
+            });
+          }}>
+          <Image
+            style={{
+              aspectRatio: 1,
+              borderRadius: 12,
+            }}
+            source={{uri: item.webformatURL}}
+          />
+        </TouchableOpacity>
       )}
     />
   );
