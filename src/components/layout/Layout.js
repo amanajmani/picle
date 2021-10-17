@@ -1,11 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
 
+/* STYLES */
+import styles from './layout.styles';
+
 const Layout = props => {
   return (
-    <View
-      {...props}
-      style={[{padding: 15, backgroundColor: '#1F2326'}, props.style]}>
+    <View {...props} style={[styles.root, props.style]}>
       {props.children}
     </View>
   );
