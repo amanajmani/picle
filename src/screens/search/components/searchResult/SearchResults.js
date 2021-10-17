@@ -10,6 +10,7 @@ const SearchResults = ({
   fetchImages,
   offset,
   isListEnd,
+  navigation,
 }) => {
   return (
     <ImageGrid
@@ -19,6 +20,7 @@ const SearchResults = ({
       offset={offset}
       fetching={fetching}
       isListEnd={isListEnd}
+      navigation={navigation}
     />
   );
 };
