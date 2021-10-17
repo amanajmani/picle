@@ -8,43 +8,34 @@ import ActionCreators from '../../actions';
 
 /* COMPONENTS */
 import SearchBox from './components/searchBox';
-import SearchResult from './components/searchResult';
+import ImageGrid from './components/imageGrid';
 import Layout from '../../components/layout';
 
 /* CONSTANTS */
-import {NO_RESULTS} from './constants/searchInfoText.constants';
+import {NO_RESULTS, PLACEHOLDER} from './constants/searchInfoText.constants';
+
+/* STYLES */
+import styles from './search.styles';
 
 const Search = ({
   onSearch,
   query,
-  data,
-  fetching,
-  fetchImages,
   offset,
-  isListEnd,
   totalHits,
   navigation,
   resetQuery,
 }) => {
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.flex}>
       <SearchBox
-        placeholder="Search Free Stock Photo"
+        placeholder={PLACEHOLDER}
         onChangeText={q => onSearch(q, offset)}
         value={query}
         resetValue={resetQuery}
       />
-      <Layout style={{flex: 1}}>
+      <Layout style={styles.flex}>
         {totalHits ? (
-          <SearchResult
-            query={query}
-            data={data}
-            fetching={fetching}
-            fetchImages={fetchImages}
-            offset={offset}
-            isListEnd={isListEnd}
-            navigation={navigation}
-          />
+          <ImageGrid navigation={navigation} />
         ) : (
           <Text>{totalHits === 0 && NO_RESULTS}</Text>
         )}
