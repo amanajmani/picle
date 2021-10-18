@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 
 /* REDUX */
 import {connect} from 'react-redux';
@@ -12,7 +12,7 @@ import ImageGrid from './components/imageGrid';
 import Layout from '../../components/layout';
 
 /* CONSTANTS */
-import {NO_RESULTS, PLACEHOLDER} from './constants/searchInfoText.constants';
+import {PLACEHOLDER} from './constants/searchInfoText.constants';
 
 /* STYLES */
 import styles from './search.styles';
@@ -34,11 +34,7 @@ const Search = ({
         resetValue={resetQuery}
       />
       <Layout style={styles.flex}>
-        {totalHits ? (
-          <ImageGrid navigation={navigation} />
-        ) : (
-          <Text>{totalHits === 0 && NO_RESULTS}</Text>
-        )}
+        <ImageGrid navigation={navigation} />
       </Layout>
     </View>
   );
