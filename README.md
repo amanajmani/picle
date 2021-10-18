@@ -76,7 +76,7 @@ If you have already installed Node on your system, make sure it is Node 12 or ne
 3. Create a [Pixabay Account](https://pixabay.com/api/docs/) in order to use their free API and get your API key
 4. Create and add a `.env` file in the root of the project and paste
    ```sh
-   REACT_APP_USER_KEY= // Your 'API Key' goes here (no quotes)
+   REACT_APP_PIXABAY_KEY= // Your 'API Key' goes here (no quotes)
    ```
 5. Run the application
     ```sh
