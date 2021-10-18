@@ -9,7 +9,6 @@
 </p>
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
-  <br/>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#tech-stack">Tech Stack</a></li>
@@ -19,6 +18,7 @@
 </details>
 
 ## About The Project
+  ![wd](https://media.giphy.com/media/m4aHHy7BTtJ3a0OlS6/giphy.gif)
 ### Screens
 **Search** - Debounced Search Bar which invokes a Grid list on response<br/>
 **Details** - Tags, Resolution, uploader's Username and Avatar Image <br/>
