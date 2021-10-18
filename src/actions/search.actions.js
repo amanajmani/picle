@@ -30,7 +30,7 @@ const debouncedSearchAPI = debounce((query, offset, dispatch) => {
       });
     }, handleError);
   }
-}, 1200);
+}, 800);
 
 export function onSearch(query, offset) {
   return dispatch => {
