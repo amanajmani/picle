@@ -9,34 +9,21 @@ import ActionCreators from '../actions';
 
 /* NAVIGATION */
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-/* HELPERS */
-import {checkOrientation} from '../helpers/checkOrientation.helpers';
 
 /* COMPONENTS */
-import Search from '../screens/search';
-import Details from '../screens/details';
+import TabNavigator from './TabNavigator';
 
-const Navigation = ({handleOrientation}) => {
-  const Stack = createNativeStackNavigator();
-
+const Navigation = ({handleOrientation, handleDeviceWidth}) => {
   React.useEffect(() => {
     Dimensions.addEventListener('change', () => {
-      handleOrientation(checkOrientation());
+      handleOrientation();
+      handleDeviceWidth();
     });
-  }, [handleOrientation]);
+  }, [handleOrientation, handleDeviceWidth]);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName="Search">
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen name="Details" component={Details} />
-      </Stack.Navigator>
+      <TabNavigator />
     </NavigationContainer>
   );
 };
