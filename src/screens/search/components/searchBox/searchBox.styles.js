@@ -3,9 +3,6 @@ import {StyleSheet} from 'react-native';
 /* THEME */
 import theme from '../../../../theme/theme';
 
-/* UTILS */
-import scale from '../../../../utils/scale.utils';
-
 const styles = StyleSheet.create({
   root: {
     backgroundColor: theme.palette.primary.dark,
@@ -21,8 +18,8 @@ const styles = StyleSheet.create({
     padding: theme.spacing(5),
   },
   logo: {
-    width: scale(28),
-    height: scale(28),
+    width: 28,
+    height: 28,
   },
 });
 

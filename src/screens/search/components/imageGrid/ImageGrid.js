@@ -83,10 +83,7 @@ const ImageGrid = ({
         {fetching ? (
           <ActivityIndicator
             color={theme.palette.secondary.main}
-            style={{
-              margin: theme.spacing(20),
-              transform: [{scale: 2}],
-            }}
+            style={styles.activityIndicator}
           />
         ) : null}
         {totalHits === 0 && (

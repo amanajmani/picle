@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
     alignItems: 'center',
   },
+  image: {
+    borderRadius: theme.shape.borderRadius,
+  },
 });
 
 export default styles;

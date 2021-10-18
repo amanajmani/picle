@@ -3,9 +3,6 @@ import {StyleSheet} from 'react-native';
 /* THEME */
 import theme from '../../../../theme/theme';
 
-/* UTILS */
-import scale from '../../../../utils/scale.utils';
-
 const styles = StyleSheet.create({
   bodyText: {
     ...theme.typography.body2,
@@ -26,8 +23,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   avatar: {
-    height: scale(40),
-    width: scale(40),
+    height: 40,
+    width: 40,
     borderRadius: 75,
   },
   userName: {
@@ -39,6 +36,12 @@ const styles = StyleSheet.create({
     padding: theme.spacing(5),
     marginRight: theme.spacing(6),
     backgroundColor: theme.palette.secondary.main,
+  },
+  imageDescriptionRoot: {
+    marginTop: theme.spacing(2),
+  },
+  userInfoContainer: {
+    marginBottom: theme.spacing(20),
   },
 });
 

@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
     marginTop: theme.spacing(8),
     color: theme.palette.text.secondary,
   },
+  activityIndicator: {
+    margin: theme.spacing(20),
+    transform: [{scale: 2}],
+  },
 });
 
 export default styles;

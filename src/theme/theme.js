@@ -1,6 +1,3 @@
-/* UTILS */
-import scale from '../utils/scale.utils';
-
 const theme = {
   palette: {
     primary: {
@@ -21,23 +18,23 @@ const theme = {
   typography: {
     h1: {
       fontWeight: 'bold',
-      fontSize: scale(20),
+      fontSize: 20,
     },
     h6: {
       fontWeight: 'bold',
-      fontSize: scale(18),
+      fontSize: 18,
     },
     body1: {
       fontWeight: 'bold',
-      fontSize: scale(16),
+      fontSize: 16,
     },
     body2: {
       fontWeight: 'normal',
-      fontSize: scale(16),
+      fontSize: 16,
     },
     caption: {
       fontWeight: 'normal',
-      fontSize: scale(14),
+      fontSize: 14,
     },
   },
   spacing: factor => 2 * factor,

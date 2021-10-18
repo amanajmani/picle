@@ -35,7 +35,7 @@ const Details = ({route, navigation, orientation}) => {
           <Image
             resizeMode="contain"
             source={{uri: item.webformatURL}}
-            style={[styles.flex, {borderRadius: theme.shape.borderRadius}]}
+            style={[styles.flex, styles.image]}
           />
         </View>
         <ImageDescription item={item} orientation={orientation} />

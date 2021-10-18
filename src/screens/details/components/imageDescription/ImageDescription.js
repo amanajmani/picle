@@ -56,8 +56,8 @@ const UserDescription = ({item}) => {
 const ImageDescription = ({item, orientation}) => {
   const {tags} = item;
   return (
-    <View style={{marginTop: theme.spacing(2)}}>
-      <View style={{marginBottom: theme.spacing(20)}}>
+    <View style={styles.imageDescriptionRoot}>
+      <View style={styles.userInfoContainer}>
         {/* User's Avatar and name */}
         <UserDescription item={item} />
 
