@@ -20,7 +20,7 @@ const theme = {
   },
   typography: {
     h1: {
-      fontWeight: 'normal',
+      fontWeight: 'bold',
       fontSize: scale(20),
     },
     h6: {
