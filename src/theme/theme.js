@@ -35,6 +35,10 @@ const theme = {
       fontWeight: 'normal',
       fontSize: scale(16),
     },
+    caption: {
+      fontWeight: 'normal',
+      fontSize: scale(14),
+    },
   },
   spacing: factor => 2 * factor,
 };
