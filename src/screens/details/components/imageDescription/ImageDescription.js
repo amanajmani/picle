@@ -9,6 +9,9 @@ import strToArr from '../../../../utils/strToArr.utils';
 
 import theme from '../../../../theme/theme';
 
+/* CONSTANTS */
+import {PORTRAIT} from '../../../../constants/orientation.constants';
+
 /* STYLE */
 import styles from './imageDescription.styles';
 
@@ -50,7 +53,7 @@ const UserDescription = ({item}) => {
   );
 };
 
-const ImageDescription = ({item}) => {
+const ImageDescription = ({item, orientation}) => {
   const {tags} = item;
   return (
     <View style={{marginTop: theme.spacing(2)}}>
@@ -63,16 +66,19 @@ const ImageDescription = ({item}) => {
       </View>
 
       {/* Horizontal List of Tags */}
-      <FlatList
-        horizontal={true}
-        data={strToArr(tags)}
-        keyExtractor={(item, index) => index}
-        renderItem={({item}) => (
-          <View style={styles.tagsContainer}>
-            <Text style={[styles.bodyText, styles.primaryText]}>{item}</Text>
-          </View>
-        )}
-      />
+      {orientation === PORTRAIT && (
+        <FlatList
+          horizontal={true}
+          data={strToArr(tags)}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
+            <View style={styles.tagsContainer}>
+              <Text style={[styles.bodyText, styles.primaryText]}>{item}</Text>
+            </View>
+          )}
+        />
+      )}
     </View>
   );
 };
