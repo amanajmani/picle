@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import theme from '../../../../theme/theme';
 
 /* CONSTANTS */
-import ELEVATION from './elevation.constants';
+import {ELEVATION} from './imageGrid.constants';
 
 const styles = StyleSheet.create({
   flex: {
@@ -17,8 +17,23 @@ const styles = StyleSheet.create({
   borderRadius: {
     borderRadius: theme.shape.borderRadius,
   },
+  noResultsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   image: {
-    aspectRatio: 1,
+    width: 300,
+    height: 400,
+  },
+  noResultsPrimaryText: {
+    ...theme.typography.h1,
+    color: theme.palette.secondary.main,
+  },
+  noResultsSecondaryText: {
+    ...theme.typography.caption,
+    textAlign: 'center',
+    marginTop: theme.spacing(8),
+    color: theme.palette.text.secondary,
   },
 });
 

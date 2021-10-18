@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Text,
 } from 'react-native';
 
 /* REDUX */
@@ -15,10 +16,15 @@ import ActionCreators from '../../../../actions';
 import theme from '../../../../theme/theme';
 
 /* CONSTANTS */
-import {PORTRAIT, LANDSCAPE} from '../../../../constants/orientation.constants';
+import {PORTRAIT} from '../../../../constants/orientation.constants';
 
 /* STYLES */
 import styles from './imageGrid.styles';
+
+import {NO_RESULTS_PRIMARY, NO_RESULTS_SECONDARY} from './imageGrid.constants';
+
+/* ASSETS */
+import noResults from '../../../../assets/images/noResults.png';
 
 const ImageGrid = ({
   data,
@@ -29,11 +35,15 @@ const ImageGrid = ({
   isListEnd,
   orientation,
   navigation,
+  deviceWidth,
+  updateGridIndex,
+  gridIndex,
+  totalHits,
 }) => {
-  const [
-    onEndReachedCalledDuringMomentum,
-    setOnEndReachedCalledDuringMomentum,
-  ] = React.useState(true);
+  const [onEndMomentumReached, setOnEndMomentumReached] = React.useState(true);
+
+  const numColumns = orientation === PORTRAIT ? 3 : 6;
+  const imageWidth = deviceWidth / numColumns;
 
   const getData = () => {
     if (!fetching && !isListEnd) {
@@ -41,53 +51,100 @@ const ImageGrid = ({
     }
   };
 
-  const renderFooter = () => {
+  const onScroll = event => {
+    let yOffset = event.nativeEvent.contentOffset.y / imageWidth;
+    updateGridIndex(yOffset);
+  };
+
+  const getItemLayout = (data, index) => ({
+    length: imageWidth,
+    offset: imageWidth * index,
+    index,
+  });
+
+  React.useEffect(() => {
+    let tempGridIndex = gridIndex;
+    if (orientation !== PORTRAIT) {
+      updateGridIndex(tempGridIndex / 2);
+    } else {
+      updateGridIndex(tempGridIndex * 2);
+    }
+  }, [orientation]);
+
+  React.useEffect(() => {
+    // reset index
+    updateGridIndex(0);
+  }, [query]);
+
+  const renderFooter = ({children}) => {
     return (
       //Footer View with Loader
-      <View>
+      <>
         {fetching ? (
-          <ActivityIndicator color="black" style={{margin: theme.spacing(5)}} />
+          <ActivityIndicator
+            color={theme.palette.secondary.main}
+            style={{
+              margin: theme.spacing(20),
+              transform: [{scale: 2}],
+            }}
+          />
         ) : null}
-      </View>
+        {totalHits === 0 && (
+          <View style={styles.noResultsContainer}>
+            <Image
+              style={styles.image}
+              source={noResults}
+              resizeMode="center"
+            />
+            <Text style={styles.noResultsPrimaryText}>
+              {NO_RESULTS_PRIMARY}
+            </Text>
+            <Text style={styles.noResultsSecondaryText}>
+              {NO_RESULTS_SECONDARY}
+            </Text>
+          </View>
+        )}
+      </>
     );
   };
 
-  const numColumns = orientation === PORTRAIT ? 3 : 6;
-
   return (
     <FlatList
+      initialScrollIndex={gridIndex}
       onEndReachedThreshold={0.5}
       onMomentumScrollBegin={() => {
-        setOnEndReachedCalledDuringMomentum(false);
+        setOnEndMomentumReached(false);
       }}
-      key={orientation === PORTRAIT ? PORTRAIT : LANDSCAPE}
+      key={orientation === PORTRAIT ? PORTRAIT : 'LANDSCAPE'}
       onEndReached={() => {
-        if (!onEndReachedCalledDuringMomentum) {
+        if (!onEndMomentumReached) {
           getData(); // LOAD MORE DATA
-          setOnEndReachedCalledDuringMomentum(true);
+          setOnEndMomentumReached(true);
         }
       }}
       ListFooterComponent={renderFooter}
       data={data}
+      onScroll={e => onScroll(e)}
+      showsVerticalScrollIndicator={false}
+      getItemLayout={getItemLayout}
       numColumns={numColumns}
-      keyExtractor={(item, index) => index}
+      keyExtractor={item => item.id.toString()}
       renderItem={({item}) => (
         <TouchableOpacity
-          style={[
-            {
-              flex: 1 / numColumns,
-            },
-            styles.grid,
-            styles.borderRadius,
-          ]}
           onPress={() => {
             navigation.navigate('Details', {
               item,
             });
           }}>
           <Image
-            style={[styles.image, styles.borderRadius]}
+            resizeMode="cover"
             source={{uri: item.webformatURL}}
+            style={[
+              {
+                height: imageWidth,
+                width: imageWidth,
+              },
+            ]}
           />
         </TouchableOpacity>
       )}
@@ -108,6 +165,8 @@ function mapStateToProps(state) {
     fetching: state.search.fetching,
     isListEnd: state.search.isListEnd,
     totalHits: state.search.totalHits,
+    deviceWidth: state.screen.deviceWidth,
+    gridIndex: state.screen.gridIndex,
   };
 }
 
