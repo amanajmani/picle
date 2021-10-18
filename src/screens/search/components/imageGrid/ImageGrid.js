@@ -105,6 +105,26 @@ const ImageGrid = ({
     );
   };
 
+  const renderItem = item => (
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('Details', {
+          item,
+        });
+      }}>
+      <Image
+        resizeMode="cover"
+        source={{uri: item.webformatURL}}
+        style={[
+          {
+            height: imageWidth,
+            width: imageWidth,
+          },
+        ]}
+      />
+    </TouchableOpacity>
+  );
+
   return (
     <FlatList
       initialScrollIndex={gridIndex}
@@ -126,25 +146,7 @@ const ImageGrid = ({
       getItemLayout={getItemLayout}
       numColumns={numColumns}
       keyExtractor={item => item.id.toString()}
-      renderItem={({item}) => (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Details', {
-              item,
-            });
-          }}>
-          <Image
-            resizeMode="cover"
-            source={{uri: item.webformatURL}}
-            style={[
-              {
-                height: imageWidth,
-                width: imageWidth,
-              },
-            ]}
-          />
-        </TouchableOpacity>
-      )}
+      renderItem={({item}) => renderItem(item)}
     />
   );
 };

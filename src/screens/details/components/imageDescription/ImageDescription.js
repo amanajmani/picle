@@ -53,6 +53,12 @@ const UserDescription = ({item}) => {
   );
 };
 
+const renderItem = item => (
+  <View style={styles.tagsContainer}>
+    <Text style={[styles.bodyText, styles.primaryText]}>{item}</Text>
+  </View>
+);
+
 const ImageDescription = ({item, orientation}) => {
   const {tags} = item;
   return (
@@ -72,11 +78,7 @@ const ImageDescription = ({item, orientation}) => {
           data={strToArr(tags)}
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) => (
-            <View style={styles.tagsContainer}>
-              <Text style={[styles.bodyText, styles.primaryText]}>{item}</Text>
-            </View>
-          )}
+          renderItem={({item}) => renderItem(item)}
         />
       )}
     </View>
