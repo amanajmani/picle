@@ -1,30 +1,16 @@
 import React from 'react';
-import {
-  View,
-  ActivityIndicator,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import {FlatList, Image, TouchableOpacity} from 'react-native';
 
 /* REDUX */
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ActionCreators from '../../../../actions';
 
-import theme from '../../../../theme/theme';
-
 /* CONSTANTS */
 import {PORTRAIT} from '../../../../constants/orientation.constants';
 
-/* STYLES */
-import styles from './imageGrid.styles';
-
-import {NO_RESULTS_PRIMARY, NO_RESULTS_SECONDARY} from './imageGrid.constants';
-
-/* ASSETS */
-import noResults from '../../../../assets/images/noResults.png';
+/* COMPONENTS */
+import ImageGridFooter from '../imageGridFooter/ImageGridFooter';
 
 const ImageGrid = ({
   data,
@@ -76,35 +62,6 @@ const ImageGrid = ({
     updateGridIndex(0);
   }, [query]);
 
-  const renderFooter = ({children}) => {
-    return (
-      //Footer View with Loader
-      <>
-        {fetching ? (
-          <ActivityIndicator
-            color={theme.palette.secondary.main}
-            style={styles.activityIndicator}
-          />
-        ) : null}
-        {totalHits === 0 && (
-          <View style={styles.noResultsContainer}>
-            <Image
-              style={styles.image}
-              source={noResults}
-              resizeMode="center"
-            />
-            <Text style={styles.noResultsPrimaryText}>
-              {NO_RESULTS_PRIMARY}
-            </Text>
-            <Text style={styles.noResultsSecondaryText}>
-              {NO_RESULTS_SECONDARY}
-            </Text>
-          </View>
-        )}
-      </>
-    );
-  };
-
   const renderItem = item => (
     <TouchableOpacity
       onPress={() => {
@@ -139,7 +96,9 @@ const ImageGrid = ({
           setOnEndMomentumReached(true);
         }
       }}
-      ListFooterComponent={renderFooter}
+      ListFooterComponent={
+        <ImageGridFooter fetching={fetching} totalHits={totalHits} />
+      }
       data={data}
       onScroll={e => onScroll(e)}
       showsVerticalScrollIndicator={false}
