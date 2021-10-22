@@ -4,9 +4,12 @@ import {View, ActivityIndicator, Image, Text} from 'react-native';
 import theme from '../../../../theme/theme';
 
 /* STYLES */
-import styles from './imageGrid.styles';
+import styles from './imageGridFooter.styles';
 
-import {NO_RESULTS_PRIMARY, NO_RESULTS_SECONDARY} from './imageGrid.constants';
+import {
+  NO_RESULTS_PRIMARY,
+  NO_RESULTS_SECONDARY,
+} from './imageGridFooter.constants';
 
 /* ASSETS */
 import noResults from '../../../../assets/images/noResults.png';
