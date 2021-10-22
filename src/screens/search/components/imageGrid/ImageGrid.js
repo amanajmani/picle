@@ -43,7 +43,7 @@ const ImageGrid = ({
   const [onEndMomentumReached, setOnEndMomentumReached] = React.useState(true);
 
   const numColumns = orientation === PORTRAIT ? 3 : 6;
-  const imageWidth = deviceWidth / numColumns;
+  const imageWidth = Math.trunc(deviceWidth / numColumns);
 
   const getData = () => {
     if (!fetching && !isListEnd) {
@@ -52,7 +52,7 @@ const ImageGrid = ({
   };
 
   const onScroll = event => {
-    let yOffset = event.nativeEvent.contentOffset.y / imageWidth;
+    let yOffset = Math.trunc(event.nativeEvent.contentOffset.y / imageWidth);
     updateGridIndex(yOffset);
   };
 
@@ -65,9 +65,9 @@ const ImageGrid = ({
   React.useEffect(() => {
     let tempGridIndex = gridIndex;
     if (orientation !== PORTRAIT) {
-      updateGridIndex(tempGridIndex / 2);
+      updateGridIndex(Math.trunc(tempGridIndex / 2));
     } else {
-      updateGridIndex(tempGridIndex * 2);
+      updateGridIndex(Math.trunc(tempGridIndex * 2));
     }
   }, [orientation]);
 
