@@ -49,6 +49,7 @@ export default function searchReducers(
       return {
         ...state,
         fetching: false,
+        offset: state.offset + 1,
         data: [...state.data, ...action.payload.data.hits],
         totalHits: action.payload.data.totalHits,
       };
